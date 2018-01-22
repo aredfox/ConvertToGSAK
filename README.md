@@ -1,5 +1,5 @@
 <img align="right" style="margin: 16px;" width="300" src="https://image.ibb.co/nxA5TR/kodefoxx_colors_projects_yvesschelpecontact.png"/>
-<img align="right" src="https://ci.appveyor.com/api/projects/status/j1127clj369e516o/branch/master?svg=true" />
+<img align="right" src="https://ci.appveyor.com/api/projects/status/b6054ld3atys96fy/branch/master?svg=true" />
 
 # ConvertToGSAK
 Application that aids converting to GSAK format. <br/>Maintained by Yves Schelpe for KodeFoxx. For **issues, errors or feature requests**, please **create <a href="https://github.com/KodeFoxx-Projects/ConvertToGSAK/issues/new">a message here</a>**.
@@ -11,4 +11,4 @@ Application that aids converting to GSAK format. <br/>Maintained by Yves Schelpe
 ## Build status
 Build status | Test status
 --- | --- 
-[![Build status](https://ci.appveyor.com/api/projects/status/j1127clj369e516o/branch/master?svg=true)](https://ci.appveyor.com/project/aredfox/kostenverdeling/branch/master) | [![Test status](http://flauschig.ch/batch.php?type=tests&account=aredfox&slug=kostenverdeling)](https://ci.appveyor.com/project/aredfox/kostenverdeling/build/tests)
+[![Build status](https://ci.appveyor.com/api/projects/status/b6054ld3atys96fy/branch/master?svg=true)](https://ci.appveyor.com/project/aredfox/converttogsak/branch/master) | [![Test status](http://flauschig.ch/batch.php?type=tests&account=aredfox&slug=kostenverdeling)](https://ci.appveyor.com/project/aredfox/converttogsak/build/tests)
