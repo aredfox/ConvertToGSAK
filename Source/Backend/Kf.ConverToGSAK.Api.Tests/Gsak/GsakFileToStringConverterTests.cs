@@ -1,4 +1,6 @@
-﻿using Kf.ConverToGSAK.Api.Gsak;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Kf.ConverToGSAK.Api.Gsak;
 using Xunit;
 
 namespace Kf.ConverToGSAK.Api.Tests.Gsak
@@ -11,6 +13,6 @@ namespace Kf.ConverToGSAK.Api.Tests.Gsak
             var sut = new GsakFileToStringConverter();
             var actual = await sut.Convert(GsakTestHelper.EmptyGsakFile);
             Assert.Equal(expected, actual);
-        }
+        }        
     }
 }
