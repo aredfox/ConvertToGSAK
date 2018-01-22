@@ -3,9 +3,22 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{73C34E6C-7670-4DB4-AE93-3707104A5CBB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{C711D8CB-8D73-4FCB-9573-64543DAF96C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BarneyGeeft-GC5", "BarneyGeeft-GC5", "{771BF129-4AFF-4C14-9A83-4107501DC453}"
+	ProjectSection(SolutionItems) = preProject
+		..\Resources\BarnyGeeft-GC5\GC5-GSAK-formatted.txt = ..\Resources\BarnyGeeft-GC5\GC5-GSAK-formatted.txt
+		..\Resources\BarnyGeeft-GC5\GC5-original.txt = ..\Resources\BarnyGeeft-GC5\GC5-original.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{771BF129-4AFF-4C14-9A83-4107501DC453} = {C711D8CB-8D73-4FCB-9573-64543DAF96C3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1C8BEAD9-DB44-4538-B73A-1555B6FE0184}
