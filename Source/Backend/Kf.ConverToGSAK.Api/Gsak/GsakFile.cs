@@ -4,6 +4,6 @@ namespace Kf.ConverToGSAK.Api.Gsak
 {
     public sealed class GsakFile
     {
-        public IEnumerable<GsakFileLine> Lines { get; }
+        public IEnumerable<GsakFileLine> Lines { get; set; }
     }
 }

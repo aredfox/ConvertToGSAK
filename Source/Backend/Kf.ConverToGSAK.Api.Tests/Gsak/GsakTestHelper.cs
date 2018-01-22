@@ -32,5 +32,19 @@ namespace Kf.ConverToGSAK.Api.Tests.Gsak
                     Longitude = "E5° 23.988"
                 }
             };
+
+        public static IEnumerable<GsakFileLine> InCompleteGsakFileLines
+            => new[] {
+                new GsakFileLine {
+                    Code = "GC5001N",
+                    WaypointName = "Wer andern eine Grube gräbt ..",
+                    Latitude = "N48° 03.327"                    
+                },                
+            };
+
+        public static GsakFile ValidGsakFile
+            => new GsakFile {
+                Lines = ValidGsakFileLines
+            };
     }
 }

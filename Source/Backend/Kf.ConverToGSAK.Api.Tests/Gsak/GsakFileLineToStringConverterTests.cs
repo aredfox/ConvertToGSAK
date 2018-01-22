@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Kf.ConverToGSAK.Api.Gsak;
 using Xunit;
 
@@ -19,9 +18,9 @@ namespace Kf.ConverToGSAK.Api.Tests.Gsak
         }
 
         public static IEnumerable<object[]> GetValidGsakFileLines()
-            => GsakTestHelper.ValidGsakFileLines.Select(gf => new object[] {
-                gf,
-                $"\"{gf.Code}\",\"{gf.WaypointName}\",\"{gf.Latitude}\",\"{gf.Longitude}\""
+            => GsakTestHelper.ValidGsakFileLines.Select(gfl => new object[] {
+                gfl,
+                $"\"{gfl.Code}\",\"{gfl.WaypointName}\",\"{gfl.Latitude}\",\"{gfl.Longitude}\""
             })
         ;
 
