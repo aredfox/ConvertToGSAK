@@ -4,6 +4,15 @@ namespace Kf.ConverToGSAK.Api.Gsak
 {
     public sealed class GsakFileLine
     {
+        public static GsakFileLine EmptyGsakFileLine
+            => new GsakFileLine {
+                Code = String.Empty,
+                WaypointName = String.Empty,
+                Latitude = String.Empty,
+                Longitude = String.Empty
+            }
+        ;
+
         public string Code { get; set; }
         public string WaypointName { get; set; }
         public string Latitude { get; set; }
