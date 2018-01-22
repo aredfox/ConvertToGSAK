@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Kf.ConverToGSAK.Api.Gsak;
 
@@ -9,12 +10,16 @@ namespace Kf.ConverToGSAK.Api.Input.BarnyGeeft
     {
         public Task<GsakFileLine> Convert(BarnyGeeftFileLine input) {
             if (input.IsEmpty)
-                return Task.FromResult(GsakFileLine.EmptyGsakFileLine);            
+                return Task.FromResult(GsakFileLine.EmptyGsakFileLine);
 
-            var code = TryExtractCode(input);
-            var waypointName = TryExtractWaypointName(input);
-            var latitude = TryExtractLatitude(input);
-            var longitude = TryExtractLongitude(input);
+            var reducingString = input.Content.Replace("  ", " ");
+            var code = TryExtractCode(reducingString);
+            reducingString = ReduceString(reducingString, code);
+            var longitude = TryExtractLongitude(reducingString);
+            reducingString = ReduceString(reducingString, longitude);
+            var latitude = TryExtractLatitude(reducingString);
+            reducingString = ReduceString(reducingString, latitude);
+            var waypointName = TryExtractWaypointName(reducingString);
 
             return Task.FromResult(new GsakFileLine {
                 Code = code,
@@ -22,14 +27,20 @@ namespace Kf.ConverToGSAK.Api.Input.BarnyGeeft
                 Latitude = latitude,
                 Longitude = longitude
             });
-        }        
+        }
 
-        private string TryExtractCode(BarnyGeeftFileLine input)
+        private static string ReduceString(string reducingString, string reduceWith)
+            => String.IsNullOrWhiteSpace(reduceWith)
+                ? reducingString
+                : reducingString?.Replace(reduceWith, "")?.Trim() ?? String.Empty;
+        
+
+        private string TryExtractCode(string reducingString)
         {
             try
             {                
-                return input.Content.StartsWith("GC")
-                    ? input.Content.Substring(0, 7)
+                return reducingString.StartsWith("GC")
+                    ? reducingString.Substring(0, 7)
                     : String.Empty;
             }
             catch (Exception ex)
@@ -38,24 +49,26 @@ namespace Kf.ConverToGSAK.Api.Input.BarnyGeeft
             }
         }
 
-        private string TryExtractWaypointName(BarnyGeeftFileLine input)
-        {
-            return "";
-        }
+        private string TryExtractWaypointName(string reducingString)
+            => reducingString?.Trim() ?? String.Empty;
 
-        private string TryExtractLongitude(BarnyGeeftFileLine input) {
+        private string TryExtractLongitude(string reducingString, bool hasLongitude = false) {
             try {                
-                var lastIndex = input.Content.LastIndexOf("°", StringComparison.Ordinal);
-                if (input.Content.IndexOf("°", StringComparison.Ordinal) == lastIndex)
-                    return String.Empty;
+                var lastIndex = reducingString.LastIndexOf("°", StringComparison.Ordinal);
+                if(lastIndex < 0) return String.Empty;
 
-                var firstPart = input.Content
+                if (!hasLongitude) {
+                    if (reducingString.IndexOf("°", StringComparison.Ordinal) == lastIndex)
+                        return String.Empty;
+                }
+
+                var firstPart = reducingString
                     .Substring(0, lastIndex);                
                 var indexOfLastSpaceInFirstPart = firstPart.LastIndexOf(" ", StringComparison.Ordinal);
                 firstPart = firstPart.Substring(indexOfLastSpaceInFirstPart).Trim();
 
-                var secondPart = input.Content
-                    .Substring(lastIndex, input.Content.Length - lastIndex);
+                var secondPart = reducingString
+                    .Substring(lastIndex, reducingString.Length - lastIndex);
 
                 return $"{firstPart}{secondPart}";
             }
@@ -65,8 +78,7 @@ namespace Kf.ConverToGSAK.Api.Input.BarnyGeeft
             }
         }
 
-        private string TryExtractLatitude(BarnyGeeftFileLine input) {
-            return "";
-        }        
+        private string TryExtractLatitude(string reducingString)
+            => TryExtractLongitude(reducingString, hasLongitude: true);
     }
 }
