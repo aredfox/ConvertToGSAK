@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Kf.ConverToGSAK.Api.Gsak;
 using Kf.ConverToGSAK.Api.Input.BarnyGeeft;
 using Xunit;
 
@@ -19,11 +20,15 @@ namespace Kf.ConverToGSAK.Api.Tests.Input.BarnyGeeft
             var barneyGeeftFile = new BarnyGeeftFile(
                 new BarneyGeeftFileToGsakFileConverter(new BarneyGeeftFileLineToGsakFileLineConverter()), 
                 input
-            );
-            Assert.Equal(expectedNumberOfBarneyGeeftLines, barneyGeeftFile.Lines.Count());
+            );            
 
             var gsakFile = await barneyGeeftFile.Convert();
-            Assert.Equal(expectedNumberOfGsakLines, gsakFile.Lines.Count());
+            var gsakToStringConverter = new GsakFileToStringConverter(new GsakFileLineToStringConverter());
+            var actualGsakString = await gsakToStringConverter.Convert(gsakFile);
+
+            Assert.Equal(actualGsakString, expected);
+            Assert.Equal(expectedNumberOfBarneyGeeftLines, barneyGeeftFile.Lines.Count());
+            Assert.Equal(expectedNumberOfGsakLines, gsakFile.Lines.Count());            
         }
 
         private string ReadFromResource(string resourceName) {
